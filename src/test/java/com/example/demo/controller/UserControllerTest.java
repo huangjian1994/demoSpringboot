@@ -27,6 +27,7 @@ public class UserControllerTest {
     public void userlList() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/users"))
         .andExpect(MockMvcResultMatchers.status().isOk());
+
     }
 
 }
