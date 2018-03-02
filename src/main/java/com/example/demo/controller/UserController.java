@@ -80,11 +80,11 @@ public class UserController {
         return userRepository.findOne(id);
     }
 
-   /* *//**
+   /**
      * 根据id查询
      * @param name name
      * @return user
-     *//*
+     */
     @ApiOperation(value = "查询用户信息",notes = "根据name查询用户信息")
     @ApiImplicitParam(name = "name",value = "用户name",dataType = "String",
             required=true)
@@ -92,10 +92,10 @@ public class UserController {
             @ApiResponse(code=400,message="请求参数没填好"),
             @ApiResponse(code=404,message="请求路径没有或页面跳转路径不对")
     })
-    @GetMapping(value = "/user/{id}")
+    @RequestMapping(value = "/user/{name}",method =RequestMethod.GET)
     public User fetchByName(@PathVariable("name") String name){
-        return userRepository.findOne();
-    }*/
+        return userRepository.findByName(name);
+    }
 
 
     @PutMapping(value = "/user/{id}")
