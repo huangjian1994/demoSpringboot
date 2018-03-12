@@ -81,7 +81,7 @@ public class UserController {
     }
 
    /**
-     * 根据id查询
+     * 根据name查询
      * @param name name
      * @return user
      */
@@ -94,7 +94,7 @@ public class UserController {
     })
     @RequestMapping(value = "/user/{name}",method =RequestMethod.GET)
     public User fetchByName(@PathVariable("name") String name){
-        return userRepository.findByName(name);
+        return userRepository.findByNameLike(name);
     }
 
 

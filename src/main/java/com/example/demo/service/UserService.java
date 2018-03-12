@@ -14,5 +14,5 @@ public interface UserService {
      *
      * @return
      */
-    User findOne(Integer id);
+
 }
