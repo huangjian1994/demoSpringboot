@@ -19,9 +19,9 @@ public class UserServiceTest {
     @Autowired
     private UserService userService;
 
-    @Test
+   /* @Test
     public void findOneTest(){
         User user = userService.findOne(6);
         Assert.assertEquals("123456",user.getPassword());
-    }
+    }*/
 }
