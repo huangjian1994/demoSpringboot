@@ -24,7 +24,7 @@ public class UserController {
 
 
     @ApiOperation(value="获取图书列表", notes="获取图书列表")
-    @RequestMapping(value={""}, method= RequestMethod.GET)
+    @RequestMapping(value={"book"}, method= RequestMethod.GET)
     public List<User> getBook() {
         List<User> book = new ArrayList<>(users.values());
         return book;

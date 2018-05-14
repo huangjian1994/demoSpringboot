@@ -14,8 +14,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HelloController {
 
     @ApiOperation(value = "获取所有用户",notes = "查询所有用户")
+    // 用的springboot？对
     @RequestMapping(value = {"/hi","say"},method = RequestMethod.GET)
     public String say(){
-        return "/system/hello";
+        System.out.println("访问hello");
+        return "system/hello";
+    }
+
+    @RequestMapping(value = {"index"},method = RequestMethod.GET)
+    public String index(){
+        return "index";
     }
 }
