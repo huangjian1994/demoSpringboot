@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.config.DataResult;
 import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
 import io.swagger.annotations.*;
@@ -10,10 +11,13 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.*;
 
+import static javafx.scene.input.KeyCode.R;
+
 /**
  * @author by hj on 2018-1-30.
  */
 @RestController
+@RequestMapping("/user")
 @Api("userController相关api")
 public class UserController {
 
@@ -50,7 +54,7 @@ public class UserController {
      * @return user
      */
     @ApiOperation(value = "新增用户",notes = "新增用户")
-    @PostMapping(value = "/adduser")
+    @PostMapping(value = "/add")
     public User addUser(@Valid User user, BindingResult bindingResult ){
         if(bindingResult.hasErrors()){
             System.out.println(bindingResult.getFieldError().getDefaultMessage());
@@ -75,13 +79,13 @@ public class UserController {
             @ApiResponse(code=400,message="请求参数没填好"),
             @ApiResponse(code=404,message="请求路径没有或页面跳转路径不对")
     })
-    @GetMapping(value = "/user/{id}")
+    @GetMapping(value = "findbyid/{id}")//??????？？？啥意思 兄弟，你一个拦截id，一个拦截name，怎么区分
     public User fetchById(@PathVariable("id") Integer id){
         return userRepository.findOne(id);
     }
 
    /**
-     * 根据name查询
+     * 根据name查询, /demo/user/search/黄健
      * @param name name
      * @return user
      */
@@ -92,13 +96,17 @@ public class UserController {
             @ApiResponse(code=400,message="请求参数没填好"),
             @ApiResponse(code=404,message="请求路径没有或页面跳转路径不对")
     })
-    @RequestMapping(value = "/user/{name}",method =RequestMethod.GET)
+    @RequestMapping(value = "search/{name}",method =RequestMethod.GET)
     public User fetchByName(@PathVariable("name") String name){
+        DataResult resultJson = new DataResult();
+        System.out.println(name);
         return userRepository.findByNameLike(name);
     }
 
 
-    @PutMapping(value = "/user/{id}")
+    @ApiOperation(value="根据id更新用户信息",notes = "根据id更新用户信息")
+    @ApiImplicitParam(name = "id",value = "用户id",dataType = "Integer",required =true)
+    @PutMapping(value = "update/{id}")
     public User updateUser(@PathVariable("id") Integer id,
                            @RequestParam("name") String name ,
                            @RequestParam("username") String username,
@@ -113,7 +121,7 @@ public class UserController {
         return userRepository.save(user);
     }
 
-    @DeleteMapping(value = "/user/{id}")
+    @DeleteMapping(value = "del/{id}}")
     public void deleteUser(@PathVariable("id") Integer id){
         userRepository.delete(id);
     }
