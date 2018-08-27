@@ -10,7 +10,7 @@ import javax.validation.constraints.Min;
 public class User {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "name", nullable = true, length = 50 )
@@ -20,7 +20,7 @@ public class User {
     private String username;
 
     @Min(value = 18 ,message = "未成年人禁止注册！")
-    private Integer age;
+    private String  age;
 
     @Column(name = "password", nullable = true, length = 50)
     private String password;
@@ -44,11 +44,11 @@ public class User {
         this.name = name;
     }
 
-    public Integer getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(Integer age) {
+    public void setAge(String age) {
         this.age = age;
     }
 
